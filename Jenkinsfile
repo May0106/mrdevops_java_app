@@ -47,8 +47,8 @@ pipeline{
             steps{
                script{
                    
-                   def SonarQubecredentialsId = 'sonarqube-api'
-                   staticCodeAnalysis(SonarQubecredentialsId)
+                   def SonarqubecredentialsId = 'sonarqube-api'
+                   staticCodeAnalysis(SonarqubecredentialsId)
                }
             } 
         }
@@ -58,8 +58,18 @@ pipeline{
             steps{
                script{
                    
-                   def SonarQubecredentialsId = 'sonarqube-api'
-                   QualityGateStatus(SonarQubecredentialsId)
+                   def SonarqubecredentialsId = 'sonarqube-api'
+                   QualityGateStatus(SonarqubecredentialsId)
+               }
+            } 
+        }
+
+        stage('Maven build : maven'){
+        when { expression { params.action == 'create'}}
+            steps{
+               script{
+                   
+                   mvnBuild()
                }
             } 
         }
