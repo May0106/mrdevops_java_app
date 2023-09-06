@@ -12,7 +12,7 @@ pipeline{
         
         
         stage('git checkout'){
-        when {expression { params.action == 'create'}} 
+        when { expression { params.action == 'create'}} 
             steps{
             gitCheckout(
                 branch: "main",
@@ -23,7 +23,7 @@ pipeline{
         }
 
         stage('Unit Test maven'){
-        when {expression { params.action == 'create'}}
+        when { expression { params.action == 'create'}}
             steps{
                script{
                    
@@ -33,7 +33,7 @@ pipeline{
         }
 
         stage('Integration Test maven'){
-        when {expression { params.action == 'create'}}
+        when { expression { params.action == 'create'}}
             steps{
                script{
                    
@@ -43,23 +43,23 @@ pipeline{
         }
 
         stage('static code analysis: sonarqube'){
-        when {expression { params.action == 'create'}}
+        when { expression { params.action == 'create'}}
             steps{
                script{
                    
                    def SonarqubecredentialsId = 'sonarqube-api'
-                   staticCodeAnalysis(SonarqubecredentialsId)
+                   staticCodeAnalysis(SonarQubecredentialsId)
                }
             } 
         }
 
         stage('Quality gate status check : sonarqube'){
-        when {expression { params.action == 'create'}}
+        when { expression { params.action == 'create'}}
             steps{
                script{
                    
-                   def SonarqubecredentialsId = 'sonarqube-api'
-                   QualityGateStatus(SonarqubecredentialsId)
+                   def SonarQubecredentialsId = 'sonarqube-api'
+                   QualityGateStatus(SonarQubecredentialsId)
                }
             } 
         }
