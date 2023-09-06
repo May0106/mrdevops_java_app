@@ -87,5 +87,15 @@ pipeline{
                }
             } 
         }
+
+        stage('Docker Iamge scan: trivy'){
+        when { expression { params.action == 'create'}}
+            steps{
+               script{
+                   
+                   dockerimageScan("${params.ImageName}","${params.ImageTag}","${params.AppName}")
+               }
+            } 
+        }
     }
 }
