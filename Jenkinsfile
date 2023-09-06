@@ -8,7 +8,7 @@ pipeline{
         stage('git checkout'){
 
             steps{
-            gtiCheckout(
+            gitCheckout(
                 branch: "main",
                 url: ""
             )
